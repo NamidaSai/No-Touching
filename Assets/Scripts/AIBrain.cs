@@ -68,10 +68,21 @@ public class AIBrain : MonoBehaviour
         foreach (GameObject mergedObject in mergedObjects)
         {
             mergedObject.transform.parent = null;
+
+            AIBrain mergedObjectBrain = mergedObject.GetComponent<AIBrain>();
+
+            // bug: causes Stack Overflow in specific unidentified cases
+            // if (mergedObjectBrain.HasMergedObjects()) { mergedObjectBrain.UnmergeObjects(); }
+
             StartCoroutine(AddBreakingForce(mergedObject));
         }
 
         mergedObjects.Clear();
+    }
+
+    public bool HasMergedObjects()
+    {
+        return mergedObjects.Count >= 1;
     }
 
     private IEnumerator AddBreakingForce(GameObject other)

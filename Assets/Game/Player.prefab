@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 4996925845654473502}
   - component: {fileID: 4996925845654473501}
   - component: {fileID: 4996925845654473499}
+  - component: {fileID: 7193796562420027899}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -340,8 +341,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3319e1dbb0bb6542bc34e459818c8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCooldown: 2
+  shootCooldown: 1
   bulletPrefab: {fileID: 1813750604553189495, guid: 1804287ed601b8d4bbd4cfa8f2ddd0f5, type: 3}
   hand: {fileID: 4996925844396421529}
   bulletSpeed: 100
   bulletDecay: 0.03
+--- !u!114 &7193796562420027899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996925845654473507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf02d62ef2869b442ab042697afa018d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  hitFXPrefab: {fileID: 0}
+  hitFXDuration: 1
+  deathFXPrefab: {fileID: 0}
+  deathFXDuration: 1

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    [SerializeField] float damage = 50f;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject);
+        if (other.GetComponent<Health>() != null)
+        {
+            other.GetComponent<Health>().TakeDamage(damage);
+        }
     }
 }
