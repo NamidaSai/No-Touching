@@ -1,21 +1,42 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class AIMerge : MonoBehaviour
 {
     [SerializeField] LayerMask targetLayer = default;
 
-
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.GetComponent<AIMerge>() == null) { return; }
-        if (other.gameObject.transform == transform) { return; }
-        if (other.GetComponentInParent<AIBrain>().isMerged) { return; }
-
         if (targetLayer == (targetLayer | (1 << other.gameObject.layer)))
         {
-            other.GetComponentInParent<AIBrain>().AddToMergedObjects(transform.root.gameObject);
-            transform.root.parent = other.gameObject.transform.root;
-            GetComponentInParent<AIBrain>().ResolveMerge(true);
+            if (other.gameObject.GetComponent<AIMerge>() == null) { return; }
+            CreateJoint(other.gameObject);
         }
+    }
+
+    private void CreateJoint(GameObject other)
+    {
+        bool hasJoint = GetComponent<FixedJoint2D>() != null;
+
+        if (hasJoint)
+        {
+            bool jointToOther = GetComponent<FixedJoint2D>().connectedBody == other.GetComponent<Rigidbody2D>();
+
+            if (jointToOther) { return; }
+        }
+
+
+        bool otherHasJoint = other.GetComponent<FixedJoint2D>() != null;
+
+        if (otherHasJoint)
+        {
+            bool otherIsAlreadyJoint = other.GetComponent<FixedJoint2D>().connectedBody == GetComponent<Rigidbody2D>();
+
+            if (otherIsAlreadyJoint) { return; }
+        }
+
+        FixedJoint2D joint = gameObject.AddComponent<FixedJoint2D>();
+        joint.connectedBody = other.GetComponent<Rigidbody2D>();
     }
 }
