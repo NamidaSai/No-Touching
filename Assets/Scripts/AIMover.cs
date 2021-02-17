@@ -55,7 +55,6 @@ public class AIMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetMoveTarget(FindObjectOfType<PlayerMover>().transform.position);
         if (moveTarget != null)
         {
             Move();
