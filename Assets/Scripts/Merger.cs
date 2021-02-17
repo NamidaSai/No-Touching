@@ -6,6 +6,7 @@ public class Merger : MonoBehaviour
 {
     public bool isMerged = false;
     public bool isMerging = false;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -18,5 +19,8 @@ public class Merger : MonoBehaviour
     private void ResolveMerge(Merger otherMerger)
     {
         if (!otherMerger.isMerged)
+        {
+
+        }
     }
 }
