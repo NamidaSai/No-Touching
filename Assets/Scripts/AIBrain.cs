@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class AIBrain : MonoBehaviour
 {
+    [SerializeField] float mergeSpeed = 700f;
     [SerializeField] float maxBreakSpeed = 10f;
     [SerializeField] float maxBreakForce = 10f;
     [SerializeField] public GameObject target = default;
@@ -28,12 +29,17 @@ public class AIBrain : MonoBehaviour
     private void Update()
     {
         if (target == null) { return; }
+        if (target.activeSelf == false) { target = null; }
 
         Follow();
     }
 
     private void Follow()
     {
+        if (target == null) { return; }
+        if (target.transform.root.gameObject.tag == "Enemy") { mover.SetMaxForce(mergeSpeed); }
+        else { mover.ResetMoveSpeed(); }
+
         mover.SetMoveTarget(target.transform.position);
     }
 
@@ -47,6 +53,7 @@ public class AIBrain : MonoBehaviour
 
         foreach (GameObject subObject in mergeSubObjects)
         {
+            if (subObject == null) { continue; }
             subObject.SetActive(!merged);
         }
     }

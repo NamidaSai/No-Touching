@@ -18,14 +18,14 @@ public class AIMover : MonoBehaviour
     Path path;
     int currentWaypoint = 0;
 
-    float startMoveSpeed;
+    float startMaxForce;
     Seeker seeker;
     Rigidbody2D thisRigidbody;
     LevelController levelController;
 
     private void Awake()
     {
-        startMoveSpeed = moveSpeed;
+        startMaxForce = maxForce;
         seeker = GetComponent<Seeker>();
         thisRigidbody = GetComponent<Rigidbody2D>();
         levelController = FindObjectOfType<LevelController>();
@@ -126,14 +126,14 @@ public class AIMover : MonoBehaviour
         moveTarget = target;
     }
 
-    public void SetMoveSpeed(float amount)
+    public void SetMaxForce(float amount)
     {
-        moveSpeed = amount;
+        maxForce = amount;
     }
 
     public void ResetMoveSpeed()
     {
-        moveSpeed = startMoveSpeed;
+        maxForce = startMaxForce;
     }
 
 }
