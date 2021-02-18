@@ -10,12 +10,19 @@ public class Health : MonoBehaviour
     [SerializeField] GameObject deathFXPrefab = default;
     [SerializeField] float deathFXDuration = 1f;
 
+    [SerializeField] bool isInvulnerable = false;
+
+    bool isAlive = true;
+
     public void TakeDamage(float amount)
     {
-        health -= amount;
         TriggerFX(hitFXPrefab, hitFXDuration);
 
-        if (health <= 0f)
+        if (isInvulnerable) { return; }
+
+        health -= amount;
+
+        if (health <= 0f && isAlive)
         {
             Die();
         }
@@ -31,7 +38,23 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        isAlive = false;
+
+        if (gameObject.tag == "Enemy")
+        {
+            FindObjectOfType<LevelController>().RemoveEnemyFromList(GetComponent<AIBrain>());
+            FindObjectOfType<LevelController>().IncrementEnemiesKilled();
+        }
+
         TriggerFX(deathFXPrefab, deathFXDuration);
-        Destroy(gameObject);
+
+        if (gameObject.tag == "Player")
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

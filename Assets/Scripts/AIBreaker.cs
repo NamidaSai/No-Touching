@@ -1,10 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class AIBreaker : MonoBehaviour
 {
+    [SerializeField] float stunDuration = 2f;
+    [SerializeField] GameObject stunnedFXPrefab = default;
+    [SerializeField] float stunFXDuration = 2f;
+    [SerializeField] float stunMoveForce = 1f;
     [SerializeField] float maxBreakSpeed = 10f;
     [SerializeField] float maxBreakForce = 10f;
     [SerializeField] LayerMask targetLayers = default;
+
+    public bool isStunned = false;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -23,15 +31,18 @@ public class AIBreaker : MonoBehaviour
         Vector2 steer = sumDirection - GetComponent<Rigidbody2D>().velocity;
         steer *= maxBreakSpeed;
         steer = Vector2.ClampMagnitude(steer, maxBreakForce);
+        StartCoroutine(BeStunned());
         GetComponent<Rigidbody2D>().AddForce(steer);
     }
 
-    private void BreakAllJoints()
+    public void BreakAllJoints()
     {
         Vector2 sumDirection = new Vector2();
         int directionCount = 0;
 
         FixedJoint2D[] joints = GetComponents<FixedJoint2D>();
+
+        if (joints.Length == 0) { return; }
 
         foreach (FixedJoint2D joint in joints)
         {
@@ -45,6 +56,7 @@ public class AIBreaker : MonoBehaviour
                 directionCount++;
             }
 
+            joint.GetComponent<AIBreaker>().StartCoroutine(BeStunned());
             Destroy(joint);
         }
 
@@ -56,5 +68,26 @@ public class AIBreaker : MonoBehaviour
             steer = Vector2.ClampMagnitude(steer, maxBreakForce);
             GetComponent<Rigidbody2D>().AddForce(steer);
         }
+    }
+
+    public IEnumerator BeStunned()
+    {
+        isStunned = true;
+        GetComponent<AIMover>().SetMaxForce(stunMoveForce);
+        TriggerStunnedFX();
+
+        yield return new WaitForSeconds(stunDuration);
+
+        isStunned = false;
+        GetComponent<AIMover>().ResetMoveSpeed();
+        GetComponent<AIMerge>().isMerged = false;
+    }
+
+    public void TriggerStunnedFX()
+    {
+        if (stunnedFXPrefab == null) { return; }
+
+        GameObject stunnedFX = Instantiate(stunnedFXPrefab, transform.position, transform.rotation) as GameObject;
+        Destroy(stunnedFX, stunFXDuration);
     }
 }

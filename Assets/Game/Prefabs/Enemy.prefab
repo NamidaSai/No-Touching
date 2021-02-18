@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 680598947}
   - component: {fileID: 680598949}
   - component: {fileID: 680598948}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Detect Merge
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 4
 --- !u!114 &680598948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,9 +74,9 @@ GameObject:
   - component: {fileID: 1036646764}
   - component: {fileID: 1036646765}
   - component: {fileID: 1036646766}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Detect Player
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 20
 --- !u!114 &1036646766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 6592807719176385141}
   - component: {fileID: 741763816537643323}
   - component: {fileID: 6013851674507801003}
+  - component: {fileID: 5701742100338959512}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -199,7 +200,7 @@ Rigidbody2D:
   m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 6271ee6765e7ec84b9a21a4bc7b064b2, type: 2}
+  m_Material: {fileID: 6200000, guid: 7a8d50aa7bf9e6543a9faac0dd701eda, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
-  maxForce: 10
+  maxForce: 16
   slowingRadius: 0.3
   nextWaypointDistance: 1
 --- !u!114 &1231194750
@@ -260,8 +261,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4582e5b2ee2ed7d44a04658541ee74bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mergeSpeed: 20
+  mergeForce: 20
+  wanderCountdown: 2
+  followPlayerOnStart: 0
   target: {fileID: 0}
+  potentialTargets: []
 --- !u!114 &6592807719176385141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,11 +278,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e0146feb8cd604b82830f23d7b6301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunDuration: 2
+  stunnedFXPrefab: {fileID: 0}
+  stunFXDuration: 2
+  stunMoveForce: 1
   maxBreakSpeed: 1500
   maxBreakForce: 2000
   targetLayers:
     serializedVersion: 2
     m_Bits: 2048
+  isStunned: 0
 --- !u!114 &741763816537643323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,11 +300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf02d62ef2869b442ab042697afa018d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 35
+  health: 25
   hitFXPrefab: {fileID: 0}
   hitFXDuration: 1
   deathFXPrefab: {fileID: 0}
   deathFXDuration: 1
+  isInvulnerable: 0
 --- !u!114 &6013851674507801003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +321,21 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 512
+  isMerged: 0
+--- !u!114 &5701742100338959512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938388897851766670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ee266d55d32b245a3c18292f93e53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  attackPushForce: 1750
 --- !u!1 &6938388899113951215
 GameObject:
   m_ObjectHideFlags: 0

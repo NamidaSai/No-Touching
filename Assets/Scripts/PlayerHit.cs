@@ -9,7 +9,15 @@ public class PlayerHit : MonoBehaviour
     {
         if (targetLayers == (targetLayers | (1 << other.gameObject.layer)))
         {
-            GetComponent<Health>().TakeDamage(damageOnHit);
+            float thisDamage = damageOnHit;
+
+            if (other.gameObject.GetComponent<AIHitter>() != null)
+            {
+                thisDamage = other.gameObject.GetComponent<AIHitter>().GetJointDamage();
+                other.gameObject.GetComponent<AIHitter>().HitStunned();
+            }
+
+            GetComponent<Health>().TakeDamage(thisDamage);
         }
     }
 }

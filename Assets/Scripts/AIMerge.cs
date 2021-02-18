@@ -6,11 +6,14 @@ public class AIMerge : MonoBehaviour
 {
     [SerializeField] LayerMask targetLayer = default;
 
+    public bool isMerged = false;
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (targetLayer == (targetLayer | (1 << other.gameObject.layer)))
         {
             if (other.gameObject.GetComponent<AIMerge>() == null) { return; }
+            isMerged = true;
             CreateJoint(other.gameObject);
         }
     }

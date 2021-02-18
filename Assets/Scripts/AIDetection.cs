@@ -11,11 +11,20 @@ public class AIDetection : MonoBehaviour
         brain = GetComponentInParent<AIBrain>();
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (targetLayers == (targetLayers | (1 << other.gameObject.layer)))
         {
-            brain.target = other.gameObject;
+
+            brain.potentialTargets.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (targetLayers == (targetLayers | (1 << other.gameObject.layer)))
+        {
+            brain.potentialTargets.Remove(other.gameObject);
         }
     }
 }
