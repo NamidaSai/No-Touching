@@ -5,6 +5,7 @@ public class LevelController : MonoBehaviour
 {
     [SerializeField] int maxTrapsActive = 2;
     [SerializeField] float trapSwitchCD = 10f;
+    [SerializeField] bool trapsCanStaySame = false;
     [SerializeField] int maxEnemiesInScene = 50;
     [SerializeField] float spawnCD = 5f;
 
@@ -25,7 +26,6 @@ public class LevelController : MonoBehaviour
     {
         SwitchTraps();
     }
-
     private void Update()
     {
         Tick();
@@ -82,20 +82,34 @@ public class LevelController : MonoBehaviour
     private void SwitchTraps()
     {
         int newTrapActive = 0;
+        List<Trap> potentialTraps = new List<Trap>();
+
+        foreach (Trap trap in trapsInScene)
+        {
+            if (trap.gameObject.activeSelf)
+            {
+                trap.gameObject.SetActive(false);
+            }
+            else if (!trapsCanStaySame)
+            {
+                potentialTraps.Add(trap);
+            }
+        }
+
+        if (potentialTraps.Count == 0)
+        {
+            potentialTraps = trapsInScene;
+        }
 
         while (newTrapActive < maxTrapsActive)
         {
-            foreach (Trap trap in trapsInScene)
+            int randomIndex = Random.Range(0, potentialTraps.Count);
+            Trap potentialTrap = potentialTraps[randomIndex];
+
+            if (!potentialTrap.gameObject.activeSelf)
             {
-                if (trap.gameObject.activeSelf)
-                {
-                    trap.gameObject.SetActive(false);
-                }
-                else if (Random.Range(0, 2) > 0)
-                {
-                    trap.gameObject.SetActive(true);
-                    newTrapActive++;
-                }
+                potentialTrap.gameObject.SetActive(true);
+                newTrapActive++;
             }
         }
     }

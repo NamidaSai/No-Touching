@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 25
+  scorePoints: 5
   hitFXPrefab: {fileID: 0}
   hitFXDuration: 1
   deathFXPrefab: {fileID: 0}

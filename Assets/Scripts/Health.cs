@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] float health = 100f;
+    [SerializeField] int scorePoints = 25;
     [SerializeField] GameObject hitFXPrefab = default;
     [SerializeField] float hitFXDuration = 1f;
     [SerializeField] GameObject deathFXPrefab = default;
@@ -12,7 +13,14 @@ public class Health : MonoBehaviour
 
     [SerializeField] bool isInvulnerable = false;
 
+    float maxHealth;
+
     bool isAlive = true;
+
+    private void Start()
+    {
+        maxHealth = health;
+    }
 
     public void TakeDamage(float amount)
     {
@@ -44,6 +52,7 @@ public class Health : MonoBehaviour
         {
             FindObjectOfType<LevelController>().RemoveEnemyFromList(GetComponent<AIBrain>());
             FindObjectOfType<LevelController>().IncrementEnemiesKilled();
+            FindObjectOfType<ScoreManager>().AddToScore(scorePoints);
         }
 
         TriggerFX(deathFXPrefab, deathFXDuration);
@@ -51,10 +60,28 @@ public class Health : MonoBehaviour
         if (gameObject.tag == "Player")
         {
             gameObject.SetActive(false);
+            FindObjectOfType<CanvasManager>().ShowGameOver();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    public void GainHealth(float amount)
+    {
+        if ((health + amount) <= maxHealth)
+        {
+            health += amount;
+        }
+        else if (health < maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+
+    public float GetFraction()
+    {
+        return health / maxHealth;
     }
 }

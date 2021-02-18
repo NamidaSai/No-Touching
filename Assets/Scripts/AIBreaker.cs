@@ -46,6 +46,12 @@ public class AIBreaker : MonoBehaviour
 
         foreach (FixedJoint2D joint in joints)
         {
+            if (joint.connectedBody == null)
+            {
+                Destroy(joint);
+                continue;
+            }
+
             float distance = Vector2.Distance(transform.position, joint.connectedBody.gameObject.transform.position);
 
             if (distance > 0)

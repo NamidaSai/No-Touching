@@ -57,4 +57,10 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(firingCoroutine);
         }
     }
+
+    public void OnPause()
+    {
+        FindObjectOfType<CanvasManager>().GamePaused();
+    }
+
 }
