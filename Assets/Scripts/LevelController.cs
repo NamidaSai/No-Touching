@@ -3,9 +3,7 @@ using System.Collections.Generic;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] int maxTrapsActive = 2;
     [SerializeField] float trapSwitchCD = 10f;
-    [SerializeField] bool trapsCanStaySame = false;
     [SerializeField] int maxEnemiesInScene = 50;
     [SerializeField] float spawnCD = 5f;
 
@@ -22,10 +20,6 @@ public class LevelController : MonoBehaviour
         spawnManager = FindObjectOfType<SpawnManager>();
     }
 
-    private void Start()
-    {
-        SwitchTraps();
-    }
     private void Update()
     {
         Tick();
@@ -34,11 +28,6 @@ public class LevelController : MonoBehaviour
     public void AddEnemyToList(AIBrain enemy)
     {
         enemiesInScene.Add(enemy);
-    }
-
-    public void AddTrapToList(Trap trap)
-    {
-        trapsInScene.Add(trap);
     }
 
     public void RemoveEnemyFromList(AIBrain enemy)
@@ -68,7 +57,7 @@ public class LevelController : MonoBehaviour
 
         if (trapTimer > trapSwitchCD)
         {
-            SwitchTraps();
+            GetComponent<TrapManager>().SwitchTraps();
             trapTimer = 0f;
         }
 
@@ -76,41 +65,6 @@ public class LevelController : MonoBehaviour
         {
             StartCoroutine(spawnManager.StartSpawnProcedure());
             spawnTimer = 0f;
-        }
-    }
-
-    private void SwitchTraps()
-    {
-        int newTrapActive = 0;
-        List<Trap> potentialTraps = new List<Trap>();
-
-        foreach (Trap trap in trapsInScene)
-        {
-            if (trap.gameObject.activeSelf)
-            {
-                trap.gameObject.SetActive(false);
-            }
-            else if (!trapsCanStaySame)
-            {
-                potentialTraps.Add(trap);
-            }
-        }
-
-        if (potentialTraps.Count == 0)
-        {
-            potentialTraps = trapsInScene;
-        }
-
-        while (newTrapActive < maxTrapsActive)
-        {
-            int randomIndex = Random.Range(0, potentialTraps.Count);
-            Trap potentialTrap = potentialTraps[randomIndex];
-
-            if (!potentialTrap.gameObject.activeSelf)
-            {
-                potentialTrap.gameObject.SetActive(true);
-                newTrapActive++;
-            }
         }
     }
 }

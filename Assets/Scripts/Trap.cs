@@ -8,7 +8,7 @@ public class Trap : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<LevelController>().AddTrapToList(this);
+        FindObjectOfType<TrapManager>().AddTrapToList(this);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
