@@ -58,7 +58,7 @@ public class LevelController : MonoBehaviour
 
         if (trapTimer > trapSwitchCD && !noTraps)
         {
-            GetComponent<TrapManager>().SwitchTraps();
+            StartCoroutine(GetComponent<TrapManager>().SwitchTraps());
             trapTimer = 0f;
         }
 

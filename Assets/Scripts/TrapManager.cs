@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class TrapManager : MonoBehaviour
 {
     [SerializeField] int maxTrapsActive = 2;
     [SerializeField] bool trapsCanStaySame = false;
+    [SerializeField] float switchTrapDelay = 1.1f;
     List<Trap> trapsInScene = new List<Trap>();
 
     private void Start()
     {
-        SwitchTraps();
+        StartCoroutine(SwitchTraps());
     }
 
     public void AddTrapToList(Trap trap)
@@ -17,7 +19,7 @@ public class TrapManager : MonoBehaviour
         trapsInScene.Add(trap);
     }
 
-    public void SwitchTraps()
+    public IEnumerator SwitchTraps()
     {
         int newTrapActive = 0;
         List<Trap> potentialTraps = new List<Trap>();
@@ -26,7 +28,7 @@ public class TrapManager : MonoBehaviour
         {
             if (trap.gameObject.activeSelf)
             {
-                trap.gameObject.SetActive(false);
+                StartCoroutine(trap.HideTrap());
             }
             else if (!trapsCanStaySame)
             {
@@ -38,6 +40,8 @@ public class TrapManager : MonoBehaviour
         {
             potentialTraps = trapsInScene;
         }
+
+        yield return new WaitForSeconds(switchTrapDelay);
 
         while (newTrapActive < maxTrapsActive)
         {
