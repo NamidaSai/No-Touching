@@ -18,8 +18,15 @@ public class AIBreaker : MonoBehaviour
     {
         if (targetLayers == (targetLayers | (1 << other.gameObject.layer)))
         {
+            GetComponent<Health>().TriggerHitFX();
             BreakAllJoints();
+            PlaySFX("enemyHit");
         }
+    }
+
+    private void PlaySFX(string soundName)
+    {
+        FindObjectOfType<AudioManager>().Play(soundName);
     }
 
     private void AddBreakingForce(Vector2 jointPosSum, Vector2 collisionPos)
@@ -81,6 +88,7 @@ public class AIBreaker : MonoBehaviour
         isStunned = true;
         GetComponent<AIMover>().SetMaxForce(stunMoveForce);
         TriggerStunnedFX();
+        GetComponent<Animator>().SetBool("isMerged", false);
 
         yield return new WaitForSeconds(stunDuration);
 
@@ -94,6 +102,8 @@ public class AIBreaker : MonoBehaviour
         if (stunnedFXPrefab == null) { return; }
 
         GameObject stunnedFX = Instantiate(stunnedFXPrefab, transform.position, transform.rotation) as GameObject;
+        stunnedFX.transform.parent = transform;
+        stunnedFX.transform.localScale = new Vector3(1, 1, 1);
         Destroy(stunnedFX, stunFXDuration);
     }
 }

@@ -7,7 +7,6 @@ public class AIMover : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] float moveSpeed = 6f;
-    [SerializeField] float maxForce = 10f;
     [SerializeField] float slowingRadius = 0.3f;
 
     [Header("Pathfinding")]
@@ -17,22 +16,24 @@ public class AIMover : MonoBehaviour
 
     Path path;
     int currentWaypoint = 0;
+    float maxForce;
 
-    float startMaxForce;
     Seeker seeker;
     Rigidbody2D thisRigidbody;
     LevelController levelController;
+    AIStats stats;
 
     private void Awake()
     {
-        startMaxForce = maxForce;
         seeker = GetComponent<Seeker>();
         thisRigidbody = GetComponent<Rigidbody2D>();
         levelController = FindObjectOfType<LevelController>();
+        stats = GetComponent<AIStats>();
     }
 
     private void Start()
     {
+        maxForce = stats.GetMoveForce();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
 
@@ -128,12 +129,12 @@ public class AIMover : MonoBehaviour
 
     public void SetMaxForce(float amount)
     {
-        maxForce = amount;
+        maxForce *= amount;
     }
 
     public void ResetMoveSpeed()
     {
-        maxForce = startMaxForce;
+        maxForce = stats.GetMoveForce();
     }
 
 }

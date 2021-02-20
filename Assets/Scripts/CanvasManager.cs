@@ -24,6 +24,7 @@ public class CanvasManager : MonoBehaviour
     {
         HUDScreen.SetActive(false);
         gameOverScreen.SetActive(true);
+        FindObjectOfType<AudioManager>().Play("gameOver");
     }
 
     private void ShowPauseMenu()

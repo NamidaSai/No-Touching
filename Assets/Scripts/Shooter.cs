@@ -9,21 +9,42 @@ public class Shooter : MonoBehaviour
     [SerializeField] Transform hand = default;
     [SerializeField] float bulletSpeed = 10f;
     [SerializeField] float bulletDecay = 0.2f;
+    [SerializeField] GameObject shootVFX = default;
+    [SerializeField] float shootFXDuration = 0.5f;
 
     public IEnumerator Shoot()
     {
         while (true)
         {
-            GameObject newBullet = CreateBullet();
-            AdjustBulletBehaviour(newBullet);
-            Destroy(newBullet, bulletDecay);
+            CreateBullet();
+            CreateVFX();
+            PlaySFX();
             yield return new WaitForSeconds(shootCooldown);
         }
     }
 
-    private GameObject CreateBullet()
+    private void CreateBullet()
     {
-        GameObject bullet = Instantiate(bulletPrefab, hand.position, transform.rotation) as GameObject;
+        GameObject newBullet = CreateObject(bulletPrefab);
+        AdjustBulletBehaviour(newBullet);
+        Destroy(newBullet, bulletDecay);
+    }
+
+    private void CreateVFX()
+    {
+        GameObject newShootFX = CreateObject(shootVFX);
+        newShootFX.transform.parent = transform;
+        Destroy(newShootFX, shootFXDuration);
+    }
+
+    private void PlaySFX()
+    {
+        FindObjectOfType<AudioManager>().Play("playerShoot");
+    }
+
+    private GameObject CreateObject(GameObject prefab)
+    {
+        GameObject bullet = Instantiate(prefab, hand.position, transform.rotation) as GameObject;
         return bullet;
     }
 

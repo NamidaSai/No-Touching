@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -45,17 +46,23 @@ TagManager:
   - name: Background
     uniqueID: 3522070905
     locked: 0
+  - name: Grid
+    uniqueID: 4003542925
+    locked: 0
   - name: Obstacles
     uniqueID: 440721741
     locked: 0
   - name: Traps
     uniqueID: 2305520499
     locked: 0
-  - name: Bullets
-    uniqueID: 143510977
+  - name: VFX
+    uniqueID: 2601402445
     locked: 0
   - name: Enemies
     uniqueID: 4271554609
+    locked: 0
+  - name: Bullets
+    uniqueID: 143510977
     locked: 0
   - name: Player
     uniqueID: 3746804283

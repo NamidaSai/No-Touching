@@ -16,6 +16,10 @@ public class AIMerge : MonoBehaviour
             isMerged = true;
             CreateJoint(other.gameObject);
         }
+        else if (other.gameObject.tag == "Wall")
+        {
+            PlaySFX("enemyWall");
+        }
     }
 
     private void CreateJoint(GameObject other)
@@ -41,5 +45,14 @@ public class AIMerge : MonoBehaviour
 
         FixedJoint2D joint = gameObject.AddComponent<FixedJoint2D>();
         joint.connectedBody = other.GetComponent<Rigidbody2D>();
+        GetComponent<Animator>().SetBool("isMerged", true);
+        other.GetComponent<Animator>().SetBool("isMerged", true);
+
+        PlaySFX("enemyMerge");
+    }
+
+    private void PlaySFX(string soundName)
+    {
+        FindObjectOfType<AudioManager>().Play(soundName);
     }
 }

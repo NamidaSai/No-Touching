@@ -4,25 +4,41 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float health = 100f;
-    [SerializeField] int scorePoints = 25;
+    [SerializeField] int playerHealth = 100;
     [SerializeField] GameObject hitFXPrefab = default;
     [SerializeField] float hitFXDuration = 1f;
     [SerializeField] GameObject deathFXPrefab = default;
     [SerializeField] float deathFXDuration = 1f;
+    [SerializeField] float deathAnimDuration = 1f;
 
-    [SerializeField] bool isInvulnerable = false;
+    [SerializeField] public bool isInvulnerable = false;
 
-    float maxHealth;
 
+    int health;
+    int scorePoints = 0;
     bool isAlive = true;
+
+    AIStats stats;
+
+    private void Awake()
+    {
+        stats = GetComponent<AIStats>();
+    }
 
     private void Start()
     {
-        maxHealth = health;
+        if (gameObject.tag == "Player")
+        {
+            health = playerHealth;
+        }
+        else
+        {
+            health = stats.GetHealth();
+            scorePoints = stats.GetScore();
+        }
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         TriggerFX(hitFXPrefab, hitFXDuration);
 
@@ -44,6 +60,11 @@ public class Health : MonoBehaviour
         Destroy(newFX, fxDuration);
     }
 
+    public void TriggerHitFX()
+    {
+        TriggerFX(hitFXPrefab, hitFXDuration);
+    }
+
     private void Die()
     {
         isAlive = false;
@@ -53,23 +74,34 @@ public class Health : MonoBehaviour
             FindObjectOfType<LevelController>().RemoveEnemyFromList(GetComponent<AIBrain>());
             FindObjectOfType<LevelController>().IncrementEnemiesKilled();
             FindObjectOfType<ScoreManager>().AddToScore(scorePoints);
+            PlaySFX("enemyDeath");
         }
 
         TriggerFX(deathFXPrefab, deathFXDuration);
+        GetComponent<Animator>().SetTrigger("isDead");
 
         if (gameObject.tag == "Player")
         {
             gameObject.SetActive(false);
             FindObjectOfType<CanvasManager>().ShowGameOver();
+            FindObjectOfType<LevelController>().DisableAllEnemyHealth();
+            PlaySFX("playerDeath");
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject, deathAnimDuration);
         }
     }
 
-    public void GainHealth(float amount)
+    private void PlaySFX(string soundName)
     {
+        FindObjectOfType<AudioManager>().Play(soundName);
+    }
+
+    public void GainHealth(int amount)
+    {
+        int maxHealth = stats.GetHealth();
+
         if ((health + amount) <= maxHealth)
         {
             health += amount;
@@ -82,6 +114,17 @@ public class Health : MonoBehaviour
 
     public float GetFraction()
     {
+        float maxHealth;
+
+        if (gameObject.tag == "Player")
+        {
+            maxHealth = playerHealth;
+        }
+        else
+        {
+            maxHealth = stats.GetHealth();
+        }
+
         return health / maxHealth;
     }
 }

@@ -1,15 +1,16 @@
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerHit : MonoBehaviour
 {
-    [SerializeField] float damageOnHit = 10f;
+    [SerializeField] int damageOnHit = 10;
     [SerializeField] LayerMask targetLayers = default;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (targetLayers == (targetLayers | (1 << other.gameObject.layer)))
         {
-            float thisDamage = damageOnHit;
+            int thisDamage = damageOnHit;
 
             if (other.gameObject.GetComponent<AIHitter>() != null)
             {
@@ -18,6 +19,17 @@ public class PlayerHit : MonoBehaviour
             }
 
             GetComponent<Health>().TakeDamage(thisDamage);
+            GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+            PlaySFX("playerHit");
         }
+        else if (other.gameObject.tag == "Wall")
+        {
+            PlaySFX("playerWall");
+        }
+    }
+
+    private void PlaySFX(string soundName)
+    {
+        FindObjectOfType<AudioManager>().Play(soundName);
     }
 }

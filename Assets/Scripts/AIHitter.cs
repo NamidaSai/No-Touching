@@ -2,12 +2,25 @@ using UnityEngine;
 
 public class AIHitter : MonoBehaviour
 {
-    [SerializeField] float damage = 10f;
     [SerializeField] float attackPushForce = 1000f;
 
-    public float GetJointDamage()
+    [SerializeField] int damage;
+
+    AIStats stats;
+
+    private void Awake()
     {
-        float thisDamage = damage;
+        stats = GetComponent<AIStats>();
+    }
+
+    private void Start()
+    {
+        damage = stats.GetDamage();
+    }
+
+    public int GetJointDamage()
+    {
+        int thisDamage = damage;
 
         if (GetComponent<FixedJoint2D>() != null)
         {
@@ -15,6 +28,8 @@ public class AIHitter : MonoBehaviour
 
             foreach (FixedJoint2D joint in joints)
             {
+                if (joint.connectedBody == null) { continue; }
+
                 thisDamage += joint.connectedBody.gameObject.GetComponent<AIHitter>().GetDamage();
             }
         }
@@ -22,7 +37,7 @@ public class AIHitter : MonoBehaviour
         return thisDamage;
     }
 
-    public float GetDamage()
+    public int GetDamage()
     {
         return damage;
     }

@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2915245545833871929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2915245545833871935}
+  - component: {fileID: 2915245545833871934}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2915245545833871935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915245545833871929}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2915245545833871934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2915245545833871929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18df81d76404f542ac8556e97f87a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: enemyWall
+    clip: {fileID: 0}
+    volume: 0.14
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: playerShoot
+    clip: {fileID: 8300000, guid: 5e80b8ef93090b04295e4fd54c54ea76, type: 3}
+    volume: 0.15
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: playerHit
+    clip: {fileID: 8300000, guid: bba9fe321d025394cae19634df7a35a5, type: 3}
+    volume: 0.55
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: playerWall
+    clip: {fileID: 0}
+    volume: 0.3
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: enemyDeath
+    clip: {fileID: 0}
+    volume: 0.7
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: playerDeath
+    clip: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: enemyMerge
+    clip: {fileID: 8300000, guid: c1ac3ac01fa0c884e86f9462ea545f7b, type: 3}
+    volume: 0.1
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: enemySpawn
+    clip: {fileID: 8300000, guid: bb76d91d97868c247af12d993ffe0897, type: 3}
+    volume: 0.1
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: playerSpawn
+    clip: {fileID: 8300000, guid: 563bf9a21151b34468967886d6f4dc71, type: 3}
+    volume: 0.15
+    pitch: 1
+    randomPitch: 0
+    loop: 0
+    stopOnPause: 1
+    source: {fileID: 0}
+  - name: menuClick
+    clip: {fileID: 8300000, guid: a92ee5a76fa5ad8469feb4dfe0b95970, type: 3}
+    volume: 0.3
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 0
+    source: {fileID: 0}
+  - name: gameOver
+    clip: {fileID: 8300000, guid: 973e911b6764de64f95e23664353196c, type: 3}
+    volume: 0.35
+    pitch: 1
+    randomPitch: 0
+    loop: 0
+    stopOnPause: 0
+    source: {fileID: 0}
+  - name: scorePop
+    clip: {fileID: 8300000, guid: 7c0ab5096c81b7d4dbbbd77c12aebd1b, type: 3}
+    volume: 0.2
+    pitch: 1
+    randomPitch: 1
+    loop: 0
+    stopOnPause: 0
+    source: {fileID: 0}

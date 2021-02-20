@@ -13,6 +13,16 @@ public class PlayerController : MonoBehaviour
 
     bool firing = false;
 
+    private void Start()
+    {
+        PlaySFX("playerSpawn"); // might have to move to Animation event
+    }
+
+    private void PlaySFX(string soundName)
+    {
+        FindObjectOfType<AudioManager>().Play(soundName);
+    }
+
     private void FixedUpdate()
     {
         GetComponent<PlayerMover>().Move(moveThrottle);

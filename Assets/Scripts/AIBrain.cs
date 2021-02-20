@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AIBrain : MonoBehaviour
 {
-    [SerializeField] float mergeForce = 20f;
+    [SerializeField] float mergeForceFactor = 1.5f;
     [SerializeField] float wanderCountdown = 2f;
     [SerializeField] bool followPlayerOnStart = false;
 
@@ -28,6 +28,8 @@ public class AIBrain : MonoBehaviour
             target = FindObjectOfType<PlayerController>().gameObject;
         }
     }
+
+
 
     private void Update()
     {
@@ -99,7 +101,7 @@ public class AIBrain : MonoBehaviour
 
         if (target.transform.root.gameObject.tag == "Enemy" && !GetComponent<AIBreaker>().isStunned)
         {
-            mover.SetMaxForce(mergeForce);
+            mover.SetMaxForce(mergeForceFactor);
         }
 
         else { mover.ResetMoveSpeed(); }

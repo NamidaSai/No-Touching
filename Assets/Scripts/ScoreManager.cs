@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     public void AddToScore(int scoreValue)
     {
         currentScore += scoreValue;
+        FindObjectOfType<AudioManager>().Play("scorePop");
     }
 
     public void ResetGame()

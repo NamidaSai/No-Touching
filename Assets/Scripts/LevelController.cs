@@ -6,6 +6,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] float trapSwitchCD = 10f;
     [SerializeField] int maxEnemiesInScene = 50;
     [SerializeField] float spawnCD = 5f;
+    [SerializeField] bool noTraps = false;
 
     List<Trap> trapsInScene = new List<Trap>();
     List<AIBrain> enemiesInScene = new List<AIBrain>();
@@ -55,7 +56,7 @@ public class LevelController : MonoBehaviour
         trapTimer += Time.deltaTime;
         spawnTimer += Time.deltaTime;
 
-        if (trapTimer > trapSwitchCD)
+        if (trapTimer > trapSwitchCD && !noTraps)
         {
             GetComponent<TrapManager>().SwitchTraps();
             trapTimer = 0f;
@@ -65,6 +66,14 @@ public class LevelController : MonoBehaviour
         {
             StartCoroutine(spawnManager.StartSpawnProcedure());
             spawnTimer = 0f;
+        }
+    }
+
+    public void DisableAllEnemyHealth()
+    {
+        foreach (AIBrain enemy in enemiesInScene)
+        {
+            enemy.GetComponent<Health>().isInvulnerable = true;
         }
     }
 }

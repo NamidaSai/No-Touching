@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [SerializeField] float damage = 50f;
+    [SerializeField] int damage = 50;
 
     private void Start()
     {
