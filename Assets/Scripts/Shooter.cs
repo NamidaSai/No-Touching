@@ -19,6 +19,7 @@ public class Shooter : MonoBehaviour
             CreateBullet();
             CreateVFX();
             PlaySFX();
+            GetComponent<Animator>().SetTrigger("Shoot");
             yield return new WaitForSeconds(shootCooldown);
         }
     }

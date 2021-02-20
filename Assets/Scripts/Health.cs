@@ -82,7 +82,7 @@ public class Health : MonoBehaviour
 
         if (gameObject.tag == "Player")
         {
-            gameObject.SetActive(false);
+            GetComponent<PlayerController>().enabled = false;
             FindObjectOfType<CanvasManager>().ShowGameOver();
             FindObjectOfType<LevelController>().DisableAllEnemyHealth();
             PlaySFX("playerDeath");

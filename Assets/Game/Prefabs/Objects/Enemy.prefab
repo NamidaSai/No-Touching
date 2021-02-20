@@ -669,6 +669,7 @@ MonoBehaviour:
   hitFXDuration: 0.5
   deathFXPrefab: {fileID: 6906742091883594268, guid: ef7b951393eb9974c932b6031a5a2573, type: 3}
   deathFXDuration: 2
+  deathAnimDuration: 1
   isInvulnerable: 0
 --- !u!114 &6013851674507801003
 MonoBehaviour:
@@ -712,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ac8728101d3e34fbd36af640f41e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScale: 0.5
+  minScale: 0.75
   maxScale: 3
   minMoveForce: 12
   maxMoveForce: 32

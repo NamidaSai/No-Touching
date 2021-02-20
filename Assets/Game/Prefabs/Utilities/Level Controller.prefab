@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapSwitchCD: 10
   maxEnemiesInScene: 100
-  spawnCD: 14
+  spawnCD: 15
+  noTraps: 0

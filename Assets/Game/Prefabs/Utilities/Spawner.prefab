@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomSpawning: 1
-  spawnDelay: 1
+  spawnDelay: 1.5
   spawnPoints:
   - {fileID: 6052478701612383838}
   - {fileID: 6052478702096387201}
