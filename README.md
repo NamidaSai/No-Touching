@@ -13,7 +13,7 @@ Features:
 
 
 
-I made this game in 5 days for the Brackeys 2021.1 Game Jam. The theme was "Stronger Together."  
+I made this game in 4 days for the Brackeys 2021.1 Game Jam. The theme was "Stronger Together."  
 
 Enjoy!
 
