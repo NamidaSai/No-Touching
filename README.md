@@ -3,19 +3,29 @@
 
 Features:
 
-[...]
-[...]
-[...]
-[...]
+Classic top down shooter controls: move with arrows/wasd, aim with mouse, click to shoot. 
+
+GamePad twin stick controls supported for main gameplay, but UI functionality untested.
+
+Shoot like a shotgun, aim for the corners: you cannot arm the enemy directly, you need to push them to the corner of the map. Just like a super sadistic game of snooker really.
+
+Heavily post-processed with neon lights and bloom. Please take precautions if you have a known light sensitivity.
+
 
 
 ------------------------------
 
 
 
-I made this game in 4 days for the Brackeys 2021.1 Game Jam. The theme was "Stronger Together."  
+I made this game over the course of 4 days for the Brackeys Game Jam 2021.1. The theme was "Stronger Together." I wanted to make a game where the theme manifested itself in the enemy's behaviour and stats. Here, as the enemies stick together, their damage  is scaled, as well as making them harder to push around.
+
+
+I wanted to make a pure retro arcade like top down shooter where I would just have fun making it. It's not the most in-depth, it could use new enemy types and player power ups, but I had fun bathing in post-processing effects and neon glow. Hopefully you enjoy those too, let me know what you think in the comments.
+
 
 Enjoy!
+
+
 
 
 
