@@ -6,6 +6,13 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] int currentScore = 0;
 
+    ScoreDisplay display;
+
+    private void Start()
+    {
+        display = FindObjectOfType<ScoreDisplay>();
+    }
+
     public int GetScore()
     {
         return currentScore;
@@ -15,6 +22,7 @@ public class ScoreManager : MonoBehaviour
     {
         currentScore += scoreValue;
         FindObjectOfType<AudioManager>().Play("scorePop");
+        TriggerAnimation();
     }
 
     public void ResetGame()
@@ -22,4 +30,8 @@ public class ScoreManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void TriggerAnimation()
+    {
+        display.GetComponent<Animator>().SetTrigger("Scored");
+    }
 }

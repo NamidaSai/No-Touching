@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class CanvasManager : MonoBehaviour
     {
         HUDScreen.SetActive(!gamePaused);
         pauseMenu.SetActive(gamePaused);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void GamePaused()

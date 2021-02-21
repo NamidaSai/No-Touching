@@ -5,7 +5,7 @@ using UnityEngine;
 public class PersistentObjects : MonoBehaviour
 {
 
-    public static PersistentObjects instance;
+    public static PersistentObjects instance = null;
 
     void Awake()
     {
@@ -13,7 +13,7 @@ public class PersistentObjects : MonoBehaviour
         {
             instance = this;
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
             return;

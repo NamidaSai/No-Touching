@@ -43,5 +43,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c6097d1cd0e4641ab36d13e43917e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracks: []
+  tracks:
+  - name: SciFi
+    clip: {fileID: 8300000, guid: d87636842ac31ab45940e9881364133a, type: 3}
+    volume: 0.02
+    pitch: 1
+    randomPitch: 0
+    loop: 1
+    stopOnPause: 0
+    source: {fileID: 0}
+  - name: Dubstep
+    clip: {fileID: 8300000, guid: 976b8afea135deb46a418be0b2348f9f, type: 3}
+    volume: 0.02
+    pitch: 1
+    randomPitch: 0
+    loop: 1
+    stopOnPause: 0
+    source: {fileID: 0}
+  - name: Moose
+    clip: {fileID: 8300000, guid: 2f1bbaa4a074bd840a5ea70d8b2ffc6c, type: 3}
+    volume: 0.035
+    pitch: 1
+    randomPitch: 0
+    loop: 1
+    stopOnPause: 0
+    source: {fileID: 0}
   startingTrack: 

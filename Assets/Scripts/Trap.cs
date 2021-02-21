@@ -19,6 +19,11 @@ public class Trap : MonoBehaviour
         {
             other.GetComponent<Health>().TakeDamage(damage);
             GetComponent<Animator>().SetTrigger("Kill");
+
+            if (other.GetComponent<PlayerHit>() != null)
+            {
+                other.GetComponent<PlayerHit>().TriggerHitFX();
+            }
         }
     }
 
@@ -27,5 +32,10 @@ public class Trap : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Hide");
         yield return new WaitForSeconds(trapHideAnimTime);
         gameObject.SetActive(false);
+    }
+
+    public int GetDamage()
+    {
+        return damage;
     }
 }

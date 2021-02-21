@@ -46,7 +46,9 @@ public class MusicPlayer : MonoBehaviour
 
         if (currentTrack != null && currentTrack.source.isPlaying)
         {
-            StartCoroutine(SwitchTrack(track));
+            if (currentTrack.source == track.source) { return; }
+            currentTrack.source.Stop();
+            track.source.Play();
             return;
         }
 

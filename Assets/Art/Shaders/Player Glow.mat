@@ -29,5 +29,5 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_6FB300FD: {r: 0, g: 2.9960785, b: 2.27451, a: 1}
+    - Color_6FB300FD: {r: 0, g: 5.992157, b: 4.54902, a: 1}
   m_BuildTextureStacks: []

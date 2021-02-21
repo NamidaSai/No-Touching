@@ -19,13 +19,18 @@ public class PlayerHit : MonoBehaviour
             }
 
             GetComponent<Health>().TakeDamage(thisDamage);
-            GetComponent<CinemachineImpulseSource>().GenerateImpulse();
-            PlaySFX("playerHit");
+            TriggerHitFX();
         }
         else if (other.gameObject.tag == "Wall")
         {
             PlaySFX("playerWall");
         }
+    }
+
+    public void TriggerHitFX()
+    {
+        GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+        PlaySFX("playerHit");
     }
 
     private void PlaySFX(string soundName)

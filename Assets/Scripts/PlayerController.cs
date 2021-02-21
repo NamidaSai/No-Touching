@@ -13,12 +13,7 @@ public class PlayerController : MonoBehaviour
 
     bool firing = false;
 
-    private void Start()
-    {
-        PlaySFX("playerSpawn"); // might have to move to Animation event
-    }
-
-    private void PlaySFX(string soundName)
+    public void PlaySFX(string soundName)
     {
         FindObjectOfType<AudioManager>().Play(soundName);
     }
@@ -56,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
+        if (FindObjectOfType<CanvasManager>().gamePaused) { return; }
+
         firing = !firing;
 
         if (firing)

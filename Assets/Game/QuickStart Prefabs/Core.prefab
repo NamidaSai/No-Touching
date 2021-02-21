@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTrapsActive: 2
   trapsCanStaySame: 1
+  switchTrapDelay: 1.1
 --- !u!114 &1843168823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +545,7 @@ MonoBehaviour:
   damageOnHit: 10
   targetLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4608
 --- !u!60 &1278504605
 PolygonCollider2D:
   m_ObjectHideFlags: 0
