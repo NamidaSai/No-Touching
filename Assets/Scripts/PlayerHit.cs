@@ -12,6 +12,8 @@ public class PlayerHit : MonoBehaviour
         {
             int thisDamage = damageOnHit;
 
+            if (!GetComponent<Health>().isAlive) { return; }
+
             if (other.gameObject.GetComponent<AIHitter>() != null)
             {
                 thisDamage = other.gameObject.GetComponent<AIHitter>().GetJointDamage();
@@ -29,6 +31,8 @@ public class PlayerHit : MonoBehaviour
 
     public void TriggerHitFX()
     {
+        if (!GetComponent<Health>().isAlive) { return; }
+
         GetComponent<CinemachineImpulseSource>().GenerateImpulse();
         PlaySFX("playerHit");
     }

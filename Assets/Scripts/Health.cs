@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
 
     int health;
     int scorePoints = 0;
-    bool isAlive = true;
+    public bool isAlive = true;
 
     AIStats stats;
 
@@ -82,15 +82,22 @@ public class Health : MonoBehaviour
 
         if (gameObject.tag == "Player")
         {
-            GetComponent<PlayerController>().enabled = false;
+            // GetComponent<PlayerController>().enabled = false;
             FindObjectOfType<CanvasManager>().ShowGameOver();
             FindObjectOfType<LevelController>().DisableAllEnemyHealth();
             PlaySFX("playerDeath");
+            StartCoroutine(DisablePlayerObject());
         }
         else
         {
             Destroy(gameObject, deathAnimDuration);
         }
+    }
+
+    private IEnumerator DisablePlayerObject()
+    {
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
     private void PlaySFX(string soundName)
