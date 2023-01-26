@@ -9,7 +9,8 @@ namespace Combat
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] int playerHealth = 100;
+        [SerializeField] float maxHealth = 100f;
+        [SerializeField] int scorePoints = 0;
         [SerializeField] GameObject hitFXPrefab = default;
         [SerializeField] float hitFXDuration = 1f;
         [SerializeField] GameObject deathFXPrefab = default;
@@ -18,32 +19,15 @@ namespace Combat
 
         [SerializeField] public bool isInvulnerable = false;
 
-
-        int health;
-        int scorePoints = 0;
+        float health;
         public bool isAlive = true;
-
-        AIStats stats;
 
         private void Awake()
         {
-            stats = GetComponent<AIStats>();
+            health = maxHealth;
         }
 
-        private void Start()
-        {
-            if (gameObject.tag == "Player")
-            {
-                health = playerHealth;
-            }
-            else
-            {
-                health = stats.GetHealth();
-                scorePoints = stats.GetScore();
-            }
-        }
-
-        public void TakeDamage(int amount)
+        public void TakeDamage(float amount)
         {
             TriggerFX(hitFXPrefab, hitFXDuration);
 
@@ -76,8 +60,8 @@ namespace Combat
 
             if (gameObject.tag == "Enemy")
             {
+                gameObject.GetComponent<Collider2D>().enabled = false;
                 FindObjectOfType<LevelController>().RemoveEnemyFromList(GetComponent<AIBrain>());
-                FindObjectOfType<LevelController>().IncrementEnemiesKilled();
                 FindObjectOfType<ScoreManager>().AddToScore(scorePoints);
                 PlaySFX("enemyDeath");
             }
@@ -87,7 +71,6 @@ namespace Combat
 
             if (gameObject.tag == "Player")
             {
-                // GetComponent<PlayerController>().enabled = false;
                 FindObjectOfType<CanvasManager>().ShowGameOver();
                 FindObjectOfType<LevelController>().DisableAllEnemyHealth();
                 PlaySFX("playerDeath");
@@ -110,33 +93,8 @@ namespace Combat
             FindObjectOfType<AudioManager>().Play(soundName);
         }
 
-        public void GainHealth(int amount)
-        {
-            int maxHealth = stats.GetHealth();
-
-            if ((health + amount) <= maxHealth)
-            {
-                health += amount;
-            }
-            else if (health < maxHealth)
-            {
-                health = maxHealth;
-            }
-        }
-
         public float GetFraction()
         {
-            float maxHealth;
-
-            if (gameObject.tag == "Player")
-            {
-                maxHealth = playerHealth;
-            }
-            else
-            {
-                maxHealth = stats.GetHealth();
-            }
-
             return health / maxHealth;
         }
     }

@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7ea63c94809434eb33f0f06413d861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minEnemiesToSpawn: 4
-  maxEnemiesToSpawn: 10
+  minEnemiesToSpawn: 1
+  maxEnemiesToSpawn: 4
   prefabsToSpawn:
   - {fileID: 6938388897851766670, guid: 3f8d507185b6dc24f96fd734bb238b81, type: 3}
 --- !u!114 &6052478701376090023

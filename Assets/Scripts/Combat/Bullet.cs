@@ -4,18 +4,38 @@ namespace Combat
 {
     public class Bullet : MonoBehaviour
     {
-        [SerializeField] float bulletScaleRate = 1f;
-        private void Start()
+        [SerializeField] private float lifetime = 2f;
+        [SerializeField] private float damageAmount = 2f;
+
+        private float timeAlive = 0f;
+
+        private void Update()
         {
-            Vector3 startScale = Vector3.zero;
-            transform.localScale = startScale;
+            if (timeAlive < lifetime)
+            {
+                timeAlive += Time.deltaTime;
+            }
+            else
+            {
+                Vanish();
+            }
         }
 
-        void Update()
+        private void Vanish()
         {
-            float scale = transform.localScale.x + (Time.deltaTime * bulletScaleRate);
-            Vector3 newScale = new Vector3(scale, scale, 1f);
-            transform.localScale = newScale;
+            Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            Health target = collider.GetComponent<Health>();
+            
+            if (target != null)
+            {
+                target.TakeDamage(damageAmount);
+            }
+            
+            Vanish();
         }
     }
 }

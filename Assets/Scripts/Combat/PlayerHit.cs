@@ -20,7 +20,7 @@ namespace Combat
 
                 if (other.gameObject.GetComponent<AIHitter>() != null)
                 {
-                    thisDamage = other.gameObject.GetComponent<AIHitter>().GetJointDamage();
+                    thisDamage = other.gameObject.GetComponent<AIHitter>().GetDamage();
                     other.gameObject.GetComponent<AIHitter>().HitStunned();
                 }
 
