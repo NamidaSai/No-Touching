@@ -14,16 +14,29 @@ namespace Player
 
         Coroutine firingCoroutine;
 
-        bool firing = false;
+        private AudioManager audioManager;
+        private PlayerMover mover;
+        private Camera mainCamera;
+        private CanvasManager canvasManager;
+        private Shooter shooter;
+
+        private void Awake()
+        {
+            mainCamera = Camera.main;
+            audioManager = FindObjectOfType<AudioManager>();
+            canvasManager = FindObjectOfType<CanvasManager>();
+            mover = GetComponent<PlayerMover>();
+            shooter = GetComponent<Shooter>();
+        }
 
         public void PlaySFX(string soundName)
         {
-            FindObjectOfType<AudioManager>().Play(soundName);
+            audioManager.Play(soundName);
         }
 
         private void FixedUpdate()
         {
-            GetComponent<PlayerMover>().Move(moveThrottle);
+            mover.Move(moveThrottle);
             LookAt();
         }
 
@@ -31,7 +44,7 @@ namespace Player
         {
             if (Gamepad.current == null)
             {
-                Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 currentLookDirection = (mouseWorldPosition - (Vector2)transform.position).normalized;
             }
             else if (lookThrottle.magnitude > 0.1f)
@@ -52,25 +65,16 @@ namespace Player
             lookThrottle = value.Get<Vector2>();
         }
 
-        public void OnFire()
+        public void OnFire(InputValue value)
         {
-            if (FindObjectOfType<CanvasManager>().gamePaused) { return; }
+            if (canvasManager.gamePaused) { return; }
 
-            firing = !firing;
-
-            if (firing)
-            {
-                firingCoroutine = StartCoroutine(GetComponent<Shooter>().Shoot());
-            }
-            else if (firingCoroutine != null)
-            {
-                StopCoroutine(firingCoroutine);
-            }
+            shooter.isShooting = value.isPressed;
         }
 
         public void OnPause()
         {
-            FindObjectOfType<CanvasManager>().GamePaused();
+            canvasManager.GamePaused();
         }
 
     }

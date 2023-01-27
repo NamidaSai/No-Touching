@@ -5,9 +5,9 @@ namespace Audio
 {
     public class AudioManager : MonoBehaviour
     {
-        [SerializeField] Sound[] sounds = null;
+        [SerializeField] protected Sound[] sounds = null;
 
-        void Awake()
+        public void Awake()
         {
             foreach (Sound sound in sounds)
             {
@@ -19,11 +19,7 @@ namespace Audio
             }
         }
 
-        private void Start()
-        {
-        }
-
-        public void Play(string soundName)
+        public virtual void Play(string soundName)
         {
             Sound sound = Array.Find(sounds, soundClip => soundClip.name == soundName);
 
@@ -49,7 +45,7 @@ namespace Audio
             sound.source.Play();
         }
 
-        public void Stop(string soundName)
+        private void Stop(string soundName)
         {
             Sound sound = Array.Find(sounds, soundClip => soundClip.name == soundName);
 
@@ -82,7 +78,7 @@ namespace Audio
             }
         }
 
-        public void SetSFXVolume(float value)
+        public void SetVolume(float value)
         {
             foreach (Sound sound in sounds)
             {

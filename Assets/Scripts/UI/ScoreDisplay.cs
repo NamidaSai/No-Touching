@@ -10,7 +10,7 @@ namespace UI
         TextMeshProUGUI scoreText;
         ScoreManager scoreManager;
 
-        void Start()
+        void Awake()
         {
             scoreText = GetComponent<TextMeshProUGUI>();
             scoreManager = FindObjectOfType<ScoreManager>();

@@ -32,13 +32,13 @@ namespace Audio
         public void SetSFXVolume(float value)
         {
             sfxVolume = value;
-            audioManager.SetSFXVolume(value);
+            audioManager.SetVolume(value);
         }
 
         public void SetMusicVolume(float value)
         {
             musicVolume = value;
-            musicPlayer.SetMusicVolume(value);
+            musicPlayer.SetVolume(value);
         }
     }
 }

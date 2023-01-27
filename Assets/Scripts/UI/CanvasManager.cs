@@ -11,10 +11,13 @@ namespace UI
         [SerializeField] GameObject pauseMenu = default;
 
         public bool gamePaused = false;
+        
+        private AudioManager audioManager;
 
         private void Awake()
         {
             Time.timeScale = 1f;
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         private void Start()
@@ -28,7 +31,7 @@ namespace UI
         {
             HUDScreen.SetActive(false);
             gameOverScreen.SetActive(true);
-            FindObjectOfType<AudioManager>().Play("gameOver");
+            audioManager.Play("gameOver");
         }
 
         private void ShowPauseMenu()
@@ -44,7 +47,7 @@ namespace UI
             {
                 Time.timeScale = 1f;
                 gamePaused = false;
-                FindObjectOfType<AudioManager>().StopPauseSounds();
+                audioManager.StopPauseSounds();
             }
 
             else

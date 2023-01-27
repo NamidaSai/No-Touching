@@ -8,11 +8,13 @@ namespace Level
     {
         [SerializeField] int currentScore = 0;
 
-        ScoreDisplay display;
+        private ScoreDisplay display;
+        private AudioManager audioManager;
 
-        private void Start()
+        private void Awake()
         {
             display = FindObjectOfType<ScoreDisplay>();
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         public int GetScore()
@@ -23,7 +25,7 @@ namespace Level
         public void AddToScore(int scoreValue)
         {
             currentScore += scoreValue;
-            FindObjectOfType<AudioManager>().Play("scorePop");
+            audioManager.Play("scorePop");
             TriggerAnimation();
         }
 

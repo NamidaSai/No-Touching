@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using Audio;
 using UnityEngine;
 
@@ -6,24 +6,51 @@ namespace Combat
 {
     public class Shooter : MonoBehaviour
     {
-        [SerializeField] float shootCooldown = 2f;
+        [SerializeField] public float shootCooldown = 2f;
         [SerializeField] GameObject bulletPrefab = default;
         [SerializeField] Transform hand = default;
         [SerializeField] float bulletSpeed = 10f;
         [SerializeField] float bulletDecay = 0.2f;
         [SerializeField] GameObject shootVFX = default;
         [SerializeField] float shootFXDuration = 0.5f;
+        private Animator animator;
+        private AudioManager audioManager;
+        
+        public bool isShooting = false;
+        private float timeSinceLastShot;
 
-        public IEnumerator Shoot()
+        private void Start()
         {
-            while (true)
+            animator = GetComponent<Animator>();
+            audioManager = FindObjectOfType<AudioManager>();
+            timeSinceLastShot = shootCooldown;
+        }
+
+        private void Update()
+        {
+            TryShooting();
+        }
+
+        private void TryShooting()
+        {
+            if (timeSinceLastShot < shootCooldown)
             {
-                CreateBullet();
-                CreateVFX();
-                PlaySFX();
-                GetComponent<Animator>().SetTrigger("Shoot");
-                yield return new WaitForSeconds(shootCooldown);
+                timeSinceLastShot += Time.deltaTime;
+                return;
             }
+
+            if (!isShooting) { return; }
+            
+            Shoot();
+            timeSinceLastShot = 0f;
+        }
+
+        public void Shoot()
+        {
+            CreateBullet();
+            CreateVFX();
+            PlaySFX();
+            animator.SetTrigger("Shoot");
         }
 
         private void CreateBullet()
@@ -42,7 +69,7 @@ namespace Combat
 
         private void PlaySFX()
         {
-            FindObjectOfType<AudioManager>().Play("playerShoot");
+            audioManager.Play("playerShoot");
         }
 
         private GameObject CreateObject(GameObject prefab)

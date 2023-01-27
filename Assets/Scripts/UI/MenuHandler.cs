@@ -1,3 +1,4 @@
+using System;
 using Audio;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +15,18 @@ namespace UI
         [SerializeField] Slider musicVolumeSlider = default;
 
         SettingsHolder settings;
+        private SettingsHolder settingsHolder;
+        private MusicPlayer audioManager;
+
+        private void Awake()
+        {
+            audioManager = FindObjectOfType<MusicPlayer>();
+            settingsHolder = FindObjectOfType<SettingsHolder>();
+        }
 
         private void Start()
         {
-            settings = FindObjectOfType<SettingsHolder>();
+            settings = settingsHolder;
             optionsMenu.SetActive(false);
             hiddenCanvas.SetActive(false);
             AddListeners();
@@ -33,10 +42,10 @@ namespace UI
 
         public void SwitchMusicTrack()
         {
-            if (FindObjectOfType<SettingsHolder>().hasSwitchedMusic) { return; }
+            if (settingsHolder.hasSwitchedMusic) { return; }
 
-            FindObjectOfType<MusicPlayer>().Play("Moose");
-            FindObjectOfType<SettingsHolder>().hasSwitchedMusic = true;
+            audioManager.Play("Moose");
+            settingsHolder.hasSwitchedMusic = true;
         }
 
         private void ResetParameters()

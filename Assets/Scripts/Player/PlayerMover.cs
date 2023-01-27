@@ -7,10 +7,12 @@ namespace Player
         [SerializeField] float moveSpeed = 6f;
 
         float startMoveSpeed;
+        private Rigidbody2D thisRigidbody;
 
         private void Awake()
         {
             startMoveSpeed = moveSpeed;
+            thisRigidbody = GetComponent<Rigidbody2D>();
         }
 
         public void Move(Vector2 moveThrottle)
@@ -21,7 +23,7 @@ namespace Player
             float moveSpeedY = moveThrottle.y * Time.fixedDeltaTime * currentMoveSpeed;
             Vector2 moveForce = new Vector2(moveSpeedX, moveSpeedY);
 
-            GetComponent<Rigidbody2D>().velocity = moveForce;
+            thisRigidbody.velocity = moveForce;
         }
 
         public void SetMoveSpeed(float amount)

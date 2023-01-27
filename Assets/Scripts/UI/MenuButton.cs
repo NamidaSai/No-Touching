@@ -7,11 +7,13 @@ namespace UI
     public class MenuButton : MonoBehaviour
     {
         Button button;
+        private AudioManager audioManager;
 
         private void Awake()
         {
             button = GetComponent<Button>();
             button.onClick.AddListener(PlayClickSFX);
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         private void PlayClickSFX()
@@ -21,7 +23,7 @@ namespace UI
 
         private void PlaySFX(string soundName)
         {
-            FindObjectOfType<AudioManager>().Play(soundName);
+            audioManager.Play(soundName);
         }
     }
 }

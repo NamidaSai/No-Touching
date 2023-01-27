@@ -21,10 +21,27 @@ namespace Combat
 
         float health;
         public bool isAlive = true;
+        
+        private LevelController levelController;
+        private ScoreManager scoreManager;
+        private CanvasManager canvasManager;
+        private Collider2D thisCollider;
+        private AudioManager audioManager;
+        private Animator animator;
+        private AIBrain aiBrain;
 
         private void Awake()
         {
             health = maxHealth;
+            
+            levelController = FindObjectOfType<LevelController>();
+            scoreManager = FindObjectOfType<ScoreManager>();
+            canvasManager = FindObjectOfType<CanvasManager>();
+            audioManager = FindObjectOfType<AudioManager>();
+            
+            thisCollider = gameObject.GetComponent<Collider2D>();
+            animator = GetComponent<Animator>();
+            aiBrain = GetComponent<AIBrain>();
         }
 
         public void TakeDamage(float amount)
@@ -60,19 +77,19 @@ namespace Combat
 
             if (gameObject.tag == "Enemy")
             {
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                FindObjectOfType<LevelController>().RemoveEnemyFromList(GetComponent<AIBrain>());
-                FindObjectOfType<ScoreManager>().AddToScore(scorePoints);
+                thisCollider.enabled = false;
+                levelController.RemoveEnemyFromList(aiBrain);
+                scoreManager.AddToScore(scorePoints);
                 PlaySFX("enemyDeath");
             }
 
             TriggerFX(deathFXPrefab, deathFXDuration);
-            GetComponent<Animator>().SetTrigger("isDead");
+            animator.SetTrigger("isDead");
 
             if (gameObject.tag == "Player")
             {
-                FindObjectOfType<CanvasManager>().ShowGameOver();
-                FindObjectOfType<LevelController>().DisableAllEnemyHealth();
+                canvasManager.ShowGameOver();
+                levelController.DisableAllEnemyHealth();
                 PlaySFX("playerDeath");
                 StartCoroutine(DisablePlayerObject());
             }
@@ -90,7 +107,7 @@ namespace Combat
 
         private void PlaySFX(string soundName)
         {
-            FindObjectOfType<AudioManager>().Play(soundName);
+            audioManager.Play(soundName);
         }
 
         public float GetFraction()

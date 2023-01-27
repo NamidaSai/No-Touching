@@ -9,6 +9,17 @@ namespace Combat
     {
         [SerializeField] int damageOnHit = 10;
         [SerializeField] LayerMask targetLayers = default;
+        
+        private Health health;
+        private CinemachineImpulseSource cinemachineImpulseSource;
+        private AudioManager audioManager;
+
+        public void Awake()
+        {
+            health = GetComponent<Health>();
+            cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+            audioManager = FindObjectOfType<AudioManager>();
+        }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -16,18 +27,19 @@ namespace Combat
             {
                 int thisDamage = damageOnHit;
 
-                if (!GetComponent<Health>().isAlive) { return; }
+                if (!health.isAlive) { return; }
 
-                if (other.gameObject.GetComponent<AIHitter>() != null)
+                AIHitter aiHitter = other.gameObject.GetComponent<AIHitter>();
+                if (aiHitter != null)
                 {
-                    thisDamage = other.gameObject.GetComponent<AIHitter>().GetDamage();
-                    other.gameObject.GetComponent<AIHitter>().HitStunned();
+                    thisDamage = aiHitter.GetDamage();
+                    aiHitter.HitStunned();
                 }
 
-                GetComponent<Health>().TakeDamage(thisDamage);
+                health.TakeDamage(thisDamage);
                 TriggerHitFX();
             }
-            else if (other.gameObject.tag == "Wall")
+            else if (other.gameObject.CompareTag("Wall"))
             {
                 PlaySFX("playerWall");
             }
@@ -35,15 +47,15 @@ namespace Combat
 
         public void TriggerHitFX()
         {
-            if (!GetComponent<Health>().isAlive) { return; }
+            if (!health.isAlive) { return; }
 
-            GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+            cinemachineImpulseSource.GenerateImpulse();
             PlaySFX("playerHit");
         }
 
         private void PlaySFX(string soundName)
         {
-            FindObjectOfType<AudioManager>().Play(soundName);
+            audioManager.Play(soundName);
         }
     }
 }

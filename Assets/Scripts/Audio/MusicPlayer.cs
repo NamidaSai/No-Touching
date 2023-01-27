@@ -1,75 +1,46 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Audio
 {
-    public class MusicPlayer : MonoBehaviour
+    public class MusicPlayer : AudioManager
     {
-        [SerializeField] Sound[] tracks = null;
         [SerializeField] string startingTrack = null;
 
-        private Sound currentTrack = null;
-
-        void Awake()
-        {
-            foreach (Sound track in tracks)
-            {
-                track.source = gameObject.AddComponent<AudioSource>();
-                track.source.clip = track.clip;
-                track.source.pitch = track.pitch;
-                track.source.loop = track.loop;
-                track.source.volume = track.volume;
-            }
-        }
+        private Sound currentSound = null;
 
         private void Start()
         {
             Play(startingTrack);
         }
 
-        public void Play(string trackName)
+        public override void Play(string trackName)
         {
-            Sound track = Array.Find(tracks, trackClip => trackClip.name == trackName);
+            Sound sound = Array.Find(sounds, trackClip => trackClip.name == trackName);
 
-            if (track == null)
+            if (sound == null)
             {
                 Debug.LogWarning("Sound: " + trackName + " not found.");
                 return;
             }
 
-            if (track.source == null)
+            if (sound.source == null)
             {
                 return;
             }
 
-            if (currentTrack != null && currentTrack.source.isPlaying)
+            if (currentSound != null && currentSound.source.isPlaying)
             {
-                if (currentTrack.source == track.source) { return; }
-                currentTrack.source.Stop();
-                track.source.Play();
+                if (currentSound.source == sound.source) { return; }
+                currentSound.source.Stop();
+                sound.source.Play();
                 return;
             }
 
-            track.source.Play();
-            currentTrack = track;
-        }
-
-        private IEnumerator SwitchTrack(Sound nextTrack)
-        {
-            currentTrack.source.loop = false;
-            yield return new WaitWhile(() => currentTrack.source.isPlaying);
-            nextTrack.source.Play();
-            nextTrack.source.loop = true;
-            currentTrack = nextTrack;
-        }
-
-        public void SetMusicVolume(float value)
-        {
-            foreach (Sound track in tracks)
-            {
-                track.source.volume = track.volume * value;
-            }
+            sound.source.Play();
+            currentSound = sound;
         }
     }
 }
