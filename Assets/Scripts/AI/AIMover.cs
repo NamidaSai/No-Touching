@@ -24,5 +24,10 @@ namespace AI
             Vector2 force = direction * moveSpeed;
             thisRigidbody.AddForce(force);
         }
+
+        public void SetMoveSpeed(float statsSpeed)
+        {
+            moveSpeed = statsSpeed;
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace Combat
             canvasManager = FindObjectOfType<CanvasManager>();
             audioManager = FindObjectOfType<AudioManager>();
             
-            thisCollider = gameObject.GetComponent<Collider2D>();
+            thisCollider = GetComponent<Collider2D>();
             animator = GetComponent<Animator>();
             aiBrain = GetComponent<AIBrain>();
         }
@@ -75,13 +75,14 @@ namespace Combat
         private void Die()
         {
             isAlive = false;
+            thisCollider.enabled = false;
 
             if (gameObject.CompareTag("Enemy"))
             {
-                thisCollider.enabled = false;
                 levelController.RemoveEnemyFromList(aiBrain);
                 scoreManager.AddToScore(scorePoints);
                 PlaySFX("enemyDeath");
+                aiBrain.SpawnChildren();
             }
 
             TriggerFX(deathFXPrefab, deathFXDuration);

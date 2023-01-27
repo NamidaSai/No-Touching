@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 2019391299}
   - {fileID: 1256938568}
   - {fileID: 1625826014}
-  startEnemiesInWave: 4
+  startEnemiesInWave: 3
   newEnemiesPerWave: 1
 --- !u!1 &6052478701612383825
 GameObject:
