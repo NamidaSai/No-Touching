@@ -36,6 +36,12 @@ namespace Combat
                     aiHitter.HitStunned();
                 }
 
+                Health aiHealth = other.gameObject.GetComponent<Health>();
+                if (aiHealth != null)
+                {
+                    aiHealth.TakeDamage(100f);
+                }
+
                 health.TakeDamage(thisDamage);
                 TriggerHitFX();
             }

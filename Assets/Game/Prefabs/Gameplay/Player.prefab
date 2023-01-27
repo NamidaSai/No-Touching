@@ -5134,10 +5134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d218ac2b4fedfb74d87a658a13c7e847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageOnHit: 10
+  damageOnHit: 100
   targetLayers:
     serializedVersion: 2
-    m_Bits: 4608
+    m_Bits: 512
 --- !u!114 &6253992965451906153
 MonoBehaviour:
   m_ObjectHideFlags: 0

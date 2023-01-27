@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ee266d55d32b245a3c18292f93e53f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPushForce: 1750
+  attackPushForce: 150
   damage: 35
 --- !u!95 &967388978
 Animator:
