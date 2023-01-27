@@ -1,4 +1,5 @@
 using UnityEngine;
+using Audio;
 
 namespace Player
 {
@@ -12,11 +13,13 @@ namespace Player
 
         private Rigidbody2D thisRigidbody;
         private Animator animator;
+        private AudioManager audioManager;
 
         private void Awake()
         {
             thisRigidbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            audioManager = FindObjectOfType<AudioManager>();
         }
 
         public void Move(Vector2 moveThrottle)
@@ -34,6 +37,7 @@ namespace Player
             {
                 propelFX.Stop();
                 propelSprite.enabled = true;
+                audioManager.Stop("propel");
             }
         }
 
@@ -62,6 +66,7 @@ namespace Player
 
             propelFX.Play();
             propelSprite.enabled = false;
+            audioManager.Play("propel");
         }
     }
 }

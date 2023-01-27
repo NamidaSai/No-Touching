@@ -45,7 +45,7 @@ namespace Audio
             sound.source.Play();
         }
 
-        private void Stop(string soundName)
+        public void Stop(string soundName)
         {
             Sound sound = Array.Find(sounds, soundClip => soundClip.name == soundName);
 

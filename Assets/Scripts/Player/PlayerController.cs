@@ -1,5 +1,4 @@
-﻿using Audio;
-using Combat;
+﻿using Combat;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +13,6 @@ namespace Player
 
         Coroutine firingCoroutine;
 
-        private AudioManager audioManager;
         private PlayerMover mover;
         private Camera mainCamera;
         private CanvasManager canvasManager;
@@ -23,15 +21,9 @@ namespace Player
         private void Awake()
         {
             mainCamera = Camera.main;
-            audioManager = FindObjectOfType<AudioManager>();
             canvasManager = FindObjectOfType<CanvasManager>();
             mover = GetComponent<PlayerMover>();
             shooter = GetComponent<Shooter>();
-        }
-
-        public void PlaySFX(string soundName)
-        {
-            audioManager.Play(soundName);
         }
 
         private void FixedUpdate()
