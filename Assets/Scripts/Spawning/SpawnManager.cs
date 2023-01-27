@@ -8,9 +8,12 @@ namespace Spawning
         [SerializeField] bool randomSpawning = false;
         [SerializeField] float spawnDelay = 0.2f;
         [SerializeField] Transform[] spawnPoints = default;
+        [SerializeField] private int startEnemiesInWave = 4;
+        [SerializeField] private int newEnemiesPerWave = 1;
+
+        private int waveCounter = 0;
 
         RandomSpawner randomSpawner;
-        WaveSpawner waveSpawner;
 
         GameObject enemyParent;
         const string ENEMY_PARENT_NAME = "Enemies";
@@ -18,7 +21,6 @@ namespace Spawning
         private void Awake()
         {
             randomSpawner = GetComponent<RandomSpawner>();
-            waveSpawner = GetComponent<WaveSpawner>();
         }
 
         private void Start()
@@ -48,9 +50,9 @@ namespace Spawning
 
         private void ProcessEndOfWave()
         {
-            if (!randomSpawning && waveSpawner.HasMoreWaves())
+            if (!randomSpawning)
             {
-                waveSpawner.StartNextWave();
+                waveCounter++;
             }
             else
             {
@@ -63,16 +65,8 @@ namespace Spawning
             GameObject selectedPrefab = null;
             Transform selectedSpawnPoint = spawnPoints[0];
 
-            if (randomSpawning)
-            {
-                selectedPrefab = randomSpawner.SelectRandomPrefab();
-                selectedSpawnPoint = randomSpawner.SelectRandomSpawnPoint(spawnPoints);
-            }
-            else
-            {
-                selectedPrefab = waveSpawner.SelectPrefabToSpawn();
-                selectedSpawnPoint = randomSpawner.SelectRandomSpawnPoint(spawnPoints);
-            }
+            selectedPrefab = randomSpawner.SelectRandomPrefab();
+            selectedSpawnPoint = randomSpawner.SelectRandomSpawnPoint(spawnPoints);
 
             SpawnAtLocation(selectedPrefab, selectedSpawnPoint);
         }
@@ -96,7 +90,7 @@ namespace Spawning
             }
             else
             {
-                numberOfEnemiesToSpawn = waveSpawner.GetNumberOfEnemiesInWave();
+                numberOfEnemiesToSpawn = waveCounter * newEnemiesPerWave + startEnemiesInWave;
             }
 
             return numberOfEnemiesToSpawn;

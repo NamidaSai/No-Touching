@@ -14,6 +14,7 @@ namespace Player
         private Rigidbody2D thisRigidbody;
         private Animator animator;
         private AudioManager audioManager;
+        private bool isDisabled = false;
 
         private void Awake()
         {
@@ -24,6 +25,8 @@ namespace Player
 
         public void Move(Vector2 moveThrottle)
         {
+            if (isDisabled) { return; }
+            
             if (moveThrottle.x != 0f)
             {
                 Rotate(moveThrottle.x);
@@ -35,9 +38,7 @@ namespace Player
             }
             else
             {
-                propelFX.Stop();
-                propelSprite.enabled = true;
-                audioManager.Stop("propel");
+                StopPropelFX();
             }
         }
 
@@ -67,6 +68,19 @@ namespace Player
             propelFX.Play();
             propelSprite.enabled = false;
             audioManager.Play("propel");
+        }
+
+        public void StopPropelFX()
+        {
+            propelFX.Stop();
+            propelSprite.enabled = true;
+            audioManager.Stop("propel");           
+        }
+
+        public void Disable()
+        {
+            StopPropelFX();
+            isDisabled = true;
         }
     }
 }

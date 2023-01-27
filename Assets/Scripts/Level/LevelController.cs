@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using AI;
 using Combat;
@@ -8,10 +9,22 @@ namespace Level
 {
     public class LevelController : MonoBehaviour
     {
+        [SerializeField] private float startDelay = 1f;
         [SerializeField] private SpawnManager spawnManager;
         
         List<AIBrain> enemiesInScene = new List<AIBrain>();
-        
+
+        private void Start()
+        {
+            StartCoroutine(LateStart());
+        }
+
+        private IEnumerator LateStart()
+        {
+            yield return new WaitForSeconds(startDelay);
+            StartCoroutine(spawnManager.StartSpawnProcedure());
+        }
+
         public void AddEnemyToList(AIBrain enemy)
         {
             enemiesInScene.Add(enemy);

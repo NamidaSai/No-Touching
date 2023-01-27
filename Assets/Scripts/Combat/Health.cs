@@ -2,6 +2,7 @@
 using AI;
 using Audio;
 using Level;
+using Player;
 using UI;
 using UnityEngine;
 
@@ -75,7 +76,7 @@ namespace Combat
         {
             isAlive = false;
 
-            if (gameObject.tag == "Enemy")
+            if (gameObject.CompareTag("Enemy"))
             {
                 thisCollider.enabled = false;
                 levelController.RemoveEnemyFromList(aiBrain);
@@ -86,7 +87,7 @@ namespace Combat
             TriggerFX(deathFXPrefab, deathFXDuration);
             animator.SetTrigger("isDead");
 
-            if (gameObject.tag == "Player")
+            if (gameObject.CompareTag("Player"))
             {
                 canvasManager.ShowGameOver();
                 levelController.DisableAllEnemyHealth();
@@ -101,6 +102,8 @@ namespace Combat
 
         private IEnumerator DisablePlayerObject()
         {
+            gameObject.GetComponent<Shooter>().enabled = false;
+            gameObject.GetComponent<PlayerMover>().Disable();
             yield return new WaitForSeconds(2f);
             gameObject.SetActive(false);
         }
