@@ -7,8 +7,8 @@ namespace Combat
 {
     public class PlayerHit : MonoBehaviour
     {
-        [SerializeField] int damageOnHit = 10;
-        [SerializeField] LayerMask targetLayers = default;
+        [SerializeField] private int damageOnHit = 10;
+        [SerializeField] private LayerMask targetLayers = default;
         
         private Health health;
         private CinemachineImpulseSource cinemachineImpulseSource;
@@ -51,7 +51,7 @@ namespace Combat
             }
         }
 
-        public void TriggerHitFX()
+        private void TriggerHitFX()
         {
             if (!health.isAlive) { return; }
 
