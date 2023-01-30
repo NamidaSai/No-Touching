@@ -1,5 +1,4 @@
-﻿using System;
-using Audio;
+﻿using Audio;
 using UnityEngine;
 
 namespace Combat
@@ -7,16 +6,16 @@ namespace Combat
     public class Shooter : MonoBehaviour
     {
         [SerializeField] public float shootCooldown = 2f;
-        [SerializeField] GameObject bulletPrefab = default;
-        [SerializeField] Transform hand = default;
-        [SerializeField] float bulletSpeed = 10f;
-        [SerializeField] float bulletDecay = 0.2f;
-        [SerializeField] GameObject shootVFX = default;
-        [SerializeField] float shootFXDuration = 0.5f;
+        [SerializeField] private GameObject bulletPrefab = default;
+        [SerializeField] private Transform hand = default;
+        [SerializeField] private float bulletSpeed = 10f;
+        [SerializeField] private float bulletDecay = 0.2f;
+        [SerializeField] private GameObject shootVFX = default;
+        [SerializeField] private float shootFXDuration = 0.5f;
         private Animator animator;
         private AudioManager audioManager;
-        
-        public bool isShooting = false;
+
+        public bool IsShooting { private get; set; } = false;
         private float timeSinceLastShot;
 
         private void Start()
@@ -39,13 +38,13 @@ namespace Combat
                 return;
             }
 
-            if (!isShooting) { return; }
+            if (!IsShooting) { return; }
             
             Shoot();
             timeSinceLastShot = 0f;
         }
 
-        public void Shoot()
+        private void Shoot()
         {
             CreateBullet();
             CreateVFX();

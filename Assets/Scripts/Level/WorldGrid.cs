@@ -4,12 +4,12 @@ namespace Level
 {
     public class WorldGrid
     {
-        private int width;
-        private int height;
-        private float cellSize;
-        private Vector2 originPosition;
+        private readonly int width;
+        private readonly int height;
+        private readonly float cellSize;
+        private readonly Vector2 originPosition;
         private Color color;
-        private int[,] gridArray;
+        private readonly int[,] gridArray;
 
         public WorldGrid(int width, int height, float cellSize, Vector2 originPosition)
         {

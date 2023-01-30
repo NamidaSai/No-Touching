@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1231194750, guid: 3f8d507185b6dc24f96fd734bb238b81, type: 3}
       propertyPath: stats.scale
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1231194750, guid: 3f8d507185b6dc24f96fd734bb238b81, type: 3}
       propertyPath: stats.speed
-      value: 100
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1628722128813302559, guid: 3f8d507185b6dc24f96fd734bb238b81, type: 3}
       propertyPath: buffer

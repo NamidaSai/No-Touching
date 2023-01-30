@@ -11,8 +11,8 @@ namespace Level
     {
         [SerializeField] private float startDelay = 1f;
         [SerializeField] private SpawnManager spawnManager;
-        
-        List<AIBrain> enemiesInScene = new List<AIBrain>();
+
+        private readonly List<AIBrain> enemiesInScene = new List<AIBrain>();
 
         private void Start()
         {

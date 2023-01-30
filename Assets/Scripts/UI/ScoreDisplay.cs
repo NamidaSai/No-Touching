@@ -6,17 +6,17 @@ namespace UI
 {
     public class ScoreDisplay : MonoBehaviour
     {
-        [SerializeField] int maxScore = 999999;
-        TextMeshProUGUI scoreText;
-        ScoreManager scoreManager;
+        [SerializeField] private int maxScore = 999999;
+        private TextMeshProUGUI scoreText;
+        private ScoreManager scoreManager;
 
-        void Awake()
+        private void Awake()
         {
             scoreText = GetComponent<TextMeshProUGUI>();
             scoreManager = FindObjectOfType<ScoreManager>();
         }
 
-        void Update()
+        private void Update()
         {
             int currentScore = scoreManager.GetScore();
             int scoreToDisplay = maxScore;

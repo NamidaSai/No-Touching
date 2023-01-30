@@ -10,17 +10,17 @@ namespace Combat
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] float maxHealth = 100f;
-        [SerializeField] int scorePoints = 0;
-        [SerializeField] GameObject hitFXPrefab = default;
-        [SerializeField] float hitFXDuration = 1f;
-        [SerializeField] GameObject deathFXPrefab = default;
-        [SerializeField] float deathFXDuration = 1f;
-        [SerializeField] float deathAnimDuration = 1f;
+        [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private int scorePoints = 0;
+        [SerializeField] private GameObject hitFXPrefab = default;
+        [SerializeField] private float hitFXDuration = 1f;
+        [SerializeField] private GameObject deathFXPrefab = default;
+        [SerializeField] private float deathFXDuration = 1f;
+        [SerializeField] private float deathAnimDuration = 1f;
 
         [SerializeField] public bool isInvulnerable = false;
 
-        float health;
+        private float health;
         public bool isAlive = true;
         
         private LevelController levelController;

@@ -4,11 +4,11 @@ namespace Spawning
 {
     public class RandomSpawner : MonoBehaviour
     {
-        [SerializeField] int minEnemiesToSpawn = 1;
-        [SerializeField] int maxEnemiesToSpawn = 3;
-        [SerializeField] GameObject[] prefabsToSpawn = default;
+        [SerializeField] private int minEnemiesToSpawn = 1;
+        [SerializeField] private int maxEnemiesToSpawn = 3;
+        [SerializeField] private GameObject[] prefabsToSpawn = default;
 
-        int lastSpawnPointIndex = 0;
+        private int lastSpawnPointIndex = 0;
 
         public Transform SelectRandomSpawnPoint(Transform[] spawnPoints)
         {

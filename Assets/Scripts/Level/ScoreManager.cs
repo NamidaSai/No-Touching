@@ -6,7 +6,7 @@ namespace Level
 {
     public class ScoreManager : MonoBehaviour
     {
-        [SerializeField] int currentScore = 0;
+        [SerializeField] private int currentScore = 0;
 
         private ScoreDisplay display;
         private AudioManager audioManager;

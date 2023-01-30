@@ -9,9 +9,9 @@ namespace Player
     {
         private Vector2 moveThrottle;
         private Vector2 lookThrottle;
-        Vector2 currentLookDirection;
+        private Vector2 currentLookDirection;
 
-        Coroutine firingCoroutine;
+        private Coroutine firingCoroutine;
 
         private PlayerMover mover;
         private Camera mainCamera;
@@ -40,7 +40,7 @@ namespace Player
         {
             if (canvasManager.gamePaused) { return; }
 
-            shooter.isShooting = value.isPressed;
+            shooter.IsShooting = value.isPressed;
         }
 
         public void OnPause()

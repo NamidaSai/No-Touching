@@ -20,7 +20,7 @@ namespace AI
 
         private void Start()
         {
-            Vector2 direction = UnityEngine.Random.insideUnitCircle.normalized;
+            Vector2 direction = Random.insideUnitCircle.normalized;
             Vector2 force = direction * moveSpeed;
             thisRigidbody.AddForce(force);
         }

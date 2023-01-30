@@ -7,14 +7,14 @@ namespace UI
 {
     public class MenuHandler : MonoBehaviour
     {
-        [SerializeField] GameObject mainMenu = default;
-        [SerializeField] GameObject optionsMenu = default;
-        [SerializeField] GameObject hiddenCanvas = default;
-        [SerializeField] Button playButton = default;
-        [SerializeField] Slider sfxVolumeSlider = default;
-        [SerializeField] Slider musicVolumeSlider = default;
+        [SerializeField] private GameObject mainMenu = default;
+        [SerializeField] private GameObject optionsMenu = default;
+        [SerializeField] private GameObject hiddenCanvas = default;
+        [SerializeField] private Button playButton = default;
+        [SerializeField] private Slider sfxVolumeSlider = default;
+        [SerializeField] private Slider musicVolumeSlider = default;
 
-        SettingsHolder settings;
+        private SettingsHolder settings;
         private SettingsHolder settingsHolder;
         private MusicPlayer audioManager;
 

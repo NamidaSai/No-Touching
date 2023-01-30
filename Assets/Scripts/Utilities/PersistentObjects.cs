@@ -4,16 +4,15 @@ namespace Utilities
 {
     public class PersistentObjects : MonoBehaviour
     {
+        private static PersistentObjects _instance = null;
 
-        public static PersistentObjects instance = null;
-
-        void Awake()
+        private void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
             }
-            else if (instance != this)
+            else if (_instance != this)
             {
                 Destroy(gameObject);
                 return;

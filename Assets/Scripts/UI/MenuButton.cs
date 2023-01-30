@@ -6,7 +6,7 @@ namespace UI
 {
     public class MenuButton : MonoBehaviour
     {
-        Button button;
+        private Button button;
         private AudioManager audioManager;
 
         private void Awake()

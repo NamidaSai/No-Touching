@@ -1,4 +1,3 @@
-using Player;
 using UnityEngine;
 
 namespace AI
@@ -8,12 +7,12 @@ namespace AI
         [SerializeField] float attackPushForce = 1000f;
         [SerializeField] int damage = 100;
         
-        private PlayerController player;
+        private GameObject player;
         private Rigidbody2D thisRigidbody;
 
         private void Awake()
         {
-            player = FindObjectOfType<PlayerController>();
+            player = GameObject.FindWithTag("Player");
             thisRigidbody = GetComponent<Rigidbody2D>();
         }
 

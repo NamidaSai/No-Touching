@@ -5,15 +5,15 @@ namespace Level
     public class GridManager : MonoBehaviour
     {
         [Header("Grid Settings")]
-        [SerializeField] int gridX = 10;
-        [SerializeField] int gridY = 10;
-        [SerializeField] float gridCellSize = 3f;
-        [SerializeField] Vector2 gridOrigin = default;
-        [SerializeField] Color lineColor = default;
-        [SerializeField] Material lineMaterial = default;
+        [SerializeField] private int gridX = 10;
+        [SerializeField] private int gridY = 10;
+        [SerializeField] private float gridCellSize = 3f;
+        [SerializeField] private Vector2 gridOrigin = default;
+        [SerializeField] private Color lineColor = default;
+        [SerializeField] private Material lineMaterial = default;
 
-        GameObject lineHolder;
-        WorldGrid grid;
+        private GameObject lineHolder;
+        private WorldGrid grid;
 
         private void Start()
         {

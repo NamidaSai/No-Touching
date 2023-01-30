@@ -6,10 +6,10 @@ namespace Utilities
 {
     public class SceneLoader : MonoBehaviour
     {
-        [SerializeField] float transitionDelay = 1f;
-        [SerializeField] GameObject fader = default;
+        [SerializeField] private float transitionDelay = 1f;
+        [SerializeField] private GameObject fader = default;
 
-        int currentSceneIndex;
+        private int currentSceneIndex;
 
         private void Awake()
         {

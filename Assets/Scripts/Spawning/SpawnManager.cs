@@ -5,18 +5,18 @@ namespace Spawning
 {
     public class SpawnManager : MonoBehaviour
     {
-        [SerializeField] bool randomSpawning = false;
-        [SerializeField] float spawnDelay = 0.2f;
-        [SerializeField] Transform[] spawnPoints = default;
+        [SerializeField] private bool randomSpawning = false;
+        [SerializeField] private float spawnDelay = 0.2f;
+        [SerializeField] private Transform[] spawnPoints = default;
         [SerializeField] private int startEnemiesInWave = 4;
         [SerializeField] private int newEnemiesPerWave = 1;
 
         private int waveCounter = 0;
 
-        RandomSpawner randomSpawner;
+        private RandomSpawner randomSpawner;
 
-        GameObject enemyParent;
-        const string ENEMY_PARENT_NAME = "Enemies";
+        private GameObject enemyParent;
+        private const string ENEMY_PARENT_NAME = "Enemies";
 
         private void Awake()
         {

@@ -6,9 +6,9 @@ namespace UI
 {
     public class CanvasManager : MonoBehaviour
     {
-        [SerializeField] GameObject HUDScreen = default;
-        [SerializeField] GameObject gameOverScreen = default;
-        [SerializeField] GameObject pauseMenu = default;
+        [SerializeField] private GameObject HUDScreen = default;
+        [SerializeField] private GameObject gameOverScreen = default;
+        [SerializeField] private GameObject pauseMenu = default;
 
         public bool gamePaused = false;
         

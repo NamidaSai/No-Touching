@@ -5,11 +5,11 @@ namespace UI
 {
     public class HealthDisplay : MonoBehaviour
     {
-        [SerializeField] Health healthComponent = null;
-        [SerializeField] RectTransform foreground = null;
-        [SerializeField] Canvas rootCanvas = null;
+        [SerializeField] private Health healthComponent = null;
+        [SerializeField] private RectTransform foreground = null;
+        [SerializeField] private Canvas rootCanvas = null;
 
-        void Update()
+        private void Update()
         {
             if (Mathf.Approximately(healthComponent.GetFraction(), 0)
                 || Mathf.Approximately(healthComponent.GetFraction(), 1)
